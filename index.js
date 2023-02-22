@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const app = express();
 
+app.use(express.static('build'));
 app.use(cors());
 app.use(express.json());
 
@@ -81,7 +82,7 @@ app.get('/info', (request, response) => {
 app.post('/api/persons', (request, response) => {
   const body = request.body;
 
-  if (!body.name || !body.number) {
+  if (!body.name || !body.phoneNumber) {
     return response.status(400).json({
       error: 'content missing',
     });
@@ -95,7 +96,7 @@ app.post('/api/persons', (request, response) => {
 
   const person = {
     name: body.name,
-    number: body.number,
+    number: body.phoneNumber,
     id: generateId(),
   };
 
